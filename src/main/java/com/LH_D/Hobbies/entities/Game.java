@@ -2,6 +2,7 @@ package com.LH_D.Hobbies.entities;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +33,7 @@ public class Game {
 	
 	@Column(name = "game_year")
 	private Integer year;
-	private String platform;
+	private String platforms;
 	
 	@Column(columnDefinition = "TEXT")
 	private String description;
@@ -42,12 +43,12 @@ public class Game {
 	public Game() {
 	}
 
-	public Game(Long id, String name, List<Genre> genres, Integer year, String genre, String platform, String description, String imgUrl) {
+	public Game(Long id, String name, List<Genre> genres, Integer year, String genre, String platforms, String description, String imgUrl) {
 		this.id = id;
 		this.name = name;
 		this.genres = genres;
 		this.year = year;
-		this.platform = platform;
+		this.platforms = platforms;
 		this.description = description;
 		this.imgUrl = imgUrl;
 	}
@@ -69,8 +70,8 @@ public class Game {
 		this.name = name;
 	}
 
-	public List<Genre> getGenres() {
-		return genres;
+	public String getGenres() {
+		return genres.stream().map(Object::toString).collect(Collectors.joining(", "));
 	}
 
 	public void setGenres(List<Genre> genre) {
@@ -86,12 +87,12 @@ public class Game {
 		this.year = year;
 	}
 	
-	public String getPlatform() {
-		return platform;
+	public String getPlatforms() {
+		return platforms;
 	}
 
-	public void setPlatform(String platform) {
-		this.platform = platform;
+	public void setPlatform(String platforms) {
+		this.platforms = platforms;
 	}
 
 	public String getDescription() {
